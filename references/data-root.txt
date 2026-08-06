@@ -1,1 +1,1 @@
-D:\Codex work\relationship-coach-data\
+./love-me-data/

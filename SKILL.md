@@ -1,15 +1,13 @@
 ---
 name: love-me
 description: >
-  Use when the user asks about romantic or intimate relationships, dating,
-  attraction, courtship, whether to pursue someone (追不追/该不该追),
-  how to pursue (怎么追/如何追), chat analysis or message drafting,
-  invitation or confession drafting, early dating and relationship building,
+  Use when the user asks about romantic or intimate relationships: dating,
+  attraction, courtship, pursuit decisions (追不追/怎么追), chat analysis,
+  message drafting, invitation or confession drafting, early dating,
   emotional support after rejection or breakup, relationship education,
-  conflict, boundaries, jealousy, long-distance relationships, reconciliation,
-  zodiac compatibility (星座/星盘/合盘), Chinese BaZi (八字/日柱/五行),
-  MBTI personality matching (MBTI/十六型人格), or explicitly requests saving,
-  recalling, reviewing, exporting, or forgetting long-term relationship records.
+  conflict, boundaries, jealousy, or breakup recovery.
+  Can optionally provide zodiac (星座), Chinese BaZi (八字), or MBTI
+  perspectives as reference frameworks (not decision tools).
 ---
 
 # Love Me — 恋爱全流程参谋
@@ -79,16 +77,22 @@ Love Me 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链路的
 
 每次用户输入按以下顺序处理（内部路由，不对外展示步骤标题）：
 
-### 1. 安全分流
+### 1. 安全分流（必经）
 检查是否存在暴力、胁迫、自伤、跟踪、私密影像威胁、未成年人或重大权力差。如有，**立即跳转** `references/safety-abuse-and-crisis.md`，不继续以下步骤。
 
-### 2. 意图识别
-加载 `references/intent-insight.md`，识别用户表层与深层情绪、真实意图（寻求确认/情绪宣泄/决策求助/技巧学习/危机求助），反馈观察并确认。
+### 2. 快速路径判断
+如果请求明确且单一（"帮我回一条消息""看看这段聊天""吵架了怎么办"），直接进入任务路由。只有以下情况才加载完整的意图和生命周期分析：
+- 用户表达了矛盾或犹豫（"我不知道该不该..."）
+- 情绪强烈且方向不明（"我好难受""我该怎么办"）
+- 涉及重大关系决策（追不追、分不分、要不要确认关系）
 
-### 3. 生命周期阶段定位
-加载 `references/lifecycle-routing.md`，判断用户当前处于哪个关系阶段（自我准备→初识→暧昧→约会→关系定义→稳定伴侣→同居/婚前→婚姻→危机→安全旁路→结束）。
+### 3. 意图识别（按需加载）
+当请求模糊或情绪复杂时，加载 `references/intent-insight.md`，识别用户表层与深层情绪、真实意图（寻求确认/情绪宣泄/决策求助/技巧学习/危机求助），反馈观察并确认。
 
-### 4. 任务路由
+### 4. 生命周期阶段定位（按需加载）
+当需要上下文定位时，加载 `references/lifecycle-routing.md`，判断用户当前处于哪个关系阶段。
+
+### 5. 任务路由
 根据意图和阶段，加载对应的参考文件执行任务：
 - 追不追犹豫 → `references/pursue-or-not.md`
 - 怎么追/邀约/表白 → `references/pursuit-strategy.md`
@@ -100,11 +104,11 @@ Love Me 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链路的
 - 星座/八字/MBTI → `references/personality-insight-layer.md`
 - 古籍视角 → `references/past-wis-bridge.md`
 
-### 5. 执行输出契约
-按 `references/output-contracts.md` 选择输出格式，确保首屏给出可用结果（草稿/分析/下一步），证据不足时标明未知而非编造。
+### 6. 执行输出契约
+按 `references/output-contracts.md` 选择输出格式，确保证据不足时标明未知而非编造。
 
-### 6. 记忆判断
-判断是否出现值得长期保存的里程碑。若是，展示拟保存内容并等待用户后续确认；否则不写档案。详见 `references/memory-protocol.md`。
+### 7. 用户主动记忆
+只有当用户明确提出"保存""记住""帮我记录"时，才加载 `references/memory-protocol.md`。默认不主动建议保存。不自动判断"这个里程碑应该记住"。
 
 ## Quick Routing
 

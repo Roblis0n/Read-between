@@ -4,9 +4,13 @@ love-me 不照搬 past-wis 的完整检索流程。古籍在 love-me 中的定�
 
 ## 资源位置
 
-- **古籍正文根目录**：`D:\Codex work\past-wis-data\corpus\`
-- **准入古籍清单**：`D:\Codex work\.codex\skills\past-wis\references\evidence-catalog.tsv`（416条）
-- **past-wis Skill 本体**：`D:\Codex work\.codex\skills\past-wis\`
+love-me 通过 skill 名引用 past-wis，而非硬编码路径。
+
+- **past-wis Skill**：如果已安装，通过 `past-wis` skill 名调用
+- **古籍正文**：由 past-wis skill 管理，love-me 不直接读取
+- **准入古籍清单**：由 past-wis skill 维护
+
+**如果 past-wis 未安装**：古籍功能不可用。love-me 在用户请求古籍视角时会说明这一点，并继续用现代知识体系提供建议。不编造古文。
 
 ## love-me 的古籍使用策略
 
@@ -90,9 +94,9 @@ love-me 不照搬 past-wis 的完整检索流程。古籍在 love-me 中的定�
 
 ### 直接读取
 
-- 根据预筛选清单，直接去 `D:\Codex work\past-wis-data\corpus\` 下的对应路径读取文件
-- 只读取与当前问题相关的段落（不需要通读全书）
-- 如果文件不存在或路径有变，标注"未找到对应原文"——不编造
+- 根据预筛选清单，通过 past-wis skill 的检索能力获取相关古籍段落
+- 只获取与当前问题相关的段落（不需要通读全书）
+- 如果 past-wis 未安装或未找到相关材料，标注"未找到对应原文"——不编造
 
 ### 引用格式
 
