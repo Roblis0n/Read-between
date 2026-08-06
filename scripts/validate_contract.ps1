@@ -1,5 +1,6 @@
 # validate_contract.ps1
-# Static verification: check all referenced files exist and SKILL.md frontmatter is valid.
+# Static verification: check all referenced files exist, SKILL.md frontmatter is valid,
+# cross-references are complete, and no orphan files exist.
 param(
     [string]$SkillRoot = $PSScriptRoot
 )
@@ -20,11 +21,18 @@ else {
     if ($skillContent -notmatch '^---\s*\n') {
         $errors += "SKILL.md missing YAML frontmatter (must start with ---)"
     }
-    if ($skillContent -notmatch 'name:\s*love-me') {
-        $errors += "SKILL.md frontmatter missing or incorrect 'name: love-me'"
+    # Check name/description in the YAML frontmatter block (first ---...---), not elsewhere
+    if ($skillContent -match '^---\s*\n(.*?)\n---') {
+        $frontmatter = $Matches[1]
+        if ($frontmatter -notmatch 'name:\s*love-me') {
+            $errors += "SKILL.md frontmatter YAML block missing 'name: love-me'"
+        }
+        if ($frontmatter -notmatch 'description:\s*[>|]') {
+            $warnings += "SKILL.md description should use YAML folded scalar (> ) or literal (| ) for multi-line triggers"
+        }
     }
-    if ($skillContent -notmatch 'description:\s*>') {
-        $warnings += "SKILL.md description should use YAML folded scalar (> ) for multi-line triggers"
+    else {
+        $errors += "SKILL.md frontmatter YAML block not properly closed (missing second ---)"
     }
     Write-Host "  [OK] SKILL.md found with frontmatter" -ForegroundColor Green
 }
@@ -76,7 +84,7 @@ foreach ($ref in $expectedRefs) {
 }
 Write-Host "  [OK] Checked $($expectedRefs.Count) expected reference files" -ForegroundColor Green
 
-# 4. Check SKILL.md references match actual files
+# 4. Check SKILL.md references match actual files + detect orphans
 if (Test-Path $skillMdPath) {
     $refMatches = [regex]::Matches($skillContent, 'references/([a-z0-9-]+\.md)')
     $referencedFiles = $refMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique
@@ -87,6 +95,14 @@ if (Test-Path $skillMdPath) {
         }
     }
     Write-Host "  [OK] Verified $($referencedFiles.Count) cross-references in SKILL.md" -ForegroundColor Green
+
+    # Detect orphan .md files in references/ not referenced by SKILL.md
+    $allRefFiles = Get-ChildItem $refsDir -Filter "*.md" | ForEach-Object { $_.Name }
+    foreach ($file in $allRefFiles) {
+        if ($file -notin $referencedFiles) {
+            $warnings += "Orphan reference file: references/$file is not referenced in SKILL.md"
+        }
+    }
 }
 
 # 5. Check scripts directory

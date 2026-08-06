@@ -76,9 +76,13 @@ else {
         }
     }
 
-    # Check: agent-inference must not be user-confirmed
-    if ($yamlBlock -match 'basis\s*:\s*agent-inference' -and $yamlBlock -match 'confidence\s*:\s*confirmed') {
+    # Check: agent-inference must not use 'confirmed' confidence
+    if (($yamlBlock -match 'basis\s*:\s*agent-inference') -and ($yamlBlock -match 'confidence\s*:\s*confirmed')) {
         $errors += "agent-inference basis cannot have 'confirmed' confidence. Use 'probable', 'possible', or 'unknown'."
+    }
+    # Check: 'basis: quoted-chat' must NOT use 'confirmed' — quoted chat is only evidence of what was said, not of internal state
+    if (($yamlBlock -match 'basis\s*:\s*quoted-chat') -and ($yamlBlock -match 'confidence\s*:\s*confirmed')) {
+        $warnings += "quoted-chat basis with 'confirmed' confidence — chat quotes confirm what was said, not what the other person thinks or feels. Consider 'probable' or 'possible'."
     }
 
     # Check: sensitivity field
@@ -103,18 +107,25 @@ else {
     }
 }
 
-# Strict: check body has required sections
-if ($Strict -and $content -match '^---\s*\n.*?\n---\s*\n(.*)' ) {
-    $body = $Matches[2]
-    # Body should at minimum separate facts from inference
-    # This is a heuristic check - not enforcing specific headers
+# Strict: check body has required separation
+if ($Strict -and $content -match '^---\s*\n.*?\n---\s*\n(.*)') {
+    $body = $Matches[1]
+    # Check for presence of at least one fact/evidence separation indicator
+    $hasFactSection = $body -match '(确认事实|## 事实|### 事实|observed facts|confirmed facts)'
+    if (-not $hasFactSection) {
+        $warnings += "Strict mode: body does not appear to separate confirmed facts from inferences. Consider adding a '确认事实' or similar section."
+    }
+    # Check for placeholder residue
+    if ($body -match '\[TODO\]|\[FIXME\]|\.\.\.\s*$') {
+        $warnings += "Strict mode: body contains placeholder text ([TODO], [FIXME], or trailing '...')"
+    }
 }
 
 # Report
 if ($errors.Count -gt 0) {
     Write-Host "`nERRORS ($($errors.Count)):" -ForegroundColor Red
     $errors | ForEach-Object { Write-Host "  - $_" -ForegroundColor Red }
-    exit 1
+    exit $errors.Count
 }
 
 if ($warnings.Count -gt 0) {

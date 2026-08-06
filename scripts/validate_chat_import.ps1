@@ -26,6 +26,23 @@ foreach ($field in $requiredFields) {
     }
 }
 
+# Speaker mapping (mandatory)
+if (-not $manifest.speaker_mapping) {
+    $errors += "Missing required field: speaker_mapping. Must contain 'user' and 'other' keys identifying who is who in the chat."
+}
+else {
+    if (-not $manifest.speaker_mapping.user) {
+        $errors += "speaker_mapping missing 'user' key — which speaker is the user?"
+    }
+    if (-not $manifest.speaker_mapping.other) {
+        $errors += "speaker_mapping missing 'other' key — which speaker is the other person?"
+    }
+    if ($manifest.speaker_mapping.user -and $manifest.speaker_mapping.other -and
+        $manifest.speaker_mapping.user -eq $manifest.speaker_mapping.other) {
+        $errors += "speaker_mapping: 'user' and 'other' cannot be the same value"
+    }
+}
+
 # Source validation
 $validSources = @("wechat_export", "qq_export", "manual_copy", "screenshot_ocr", "voice_transcript", "user_narration", "whatsapp_export", "telegram_export", "json_export", "csv_export")
 if ($manifest.source -and $manifest.source -notin $validSources) {

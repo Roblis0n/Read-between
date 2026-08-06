@@ -54,7 +54,8 @@ foreach ($name in $NamesToRedact) {
         $count = ([regex]::Matches($content, [regex]::Escape($name))).Count
         $placeholder = "[Person_$($redactions.Count + 1)]"
         $content = $content -replace [regex]::Escape($name), $placeholder
-        $redactions += "Name '$name' → '$placeholder' ($count occurrences)"
+        # DO NOT log original names — only count and placeholder
+        $redactions += "Name redacted → '$placeholder' ($count occurrences)"
     }
 }
 

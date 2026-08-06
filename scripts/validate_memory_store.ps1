@@ -26,9 +26,11 @@ if (-not $DataRoot) {
 Write-Host "Data root: $DataRoot"
 
 if (-not (Test-Path $DataRoot)) {
-    Write-Warning "Data root directory does not exist: $DataRoot"
-    Write-Host "  This is normal if no long-term records have been created yet."
-    Write-Host "  The directory will be created on first memory write."
+    Write-Host "Data root directory does not exist: $DataRoot" -ForegroundColor Yellow
+    Write-Host "  This means the memory store has not been initialized."
+    Write-Host "  If you expected records to exist, check data-root.txt for the correct path."
+    Write-Host "  To create the directory structure, create the folder at the path above."
+    Write-Host "  No records to validate — this is not an error state."
     exit 0
 }
 
@@ -89,7 +91,8 @@ if ($CheckRecords) {
     else {
         Write-Host "  All records passed validation" -ForegroundColor Green
     }
+    $totalFailures = $failCount
 }
 
 Write-Host "`nMemory store validation complete." -ForegroundColor Green
-exit 0
+exit $totalFailures

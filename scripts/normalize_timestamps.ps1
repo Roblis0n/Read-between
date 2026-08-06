@@ -85,6 +85,15 @@ foreach ($msg in $messages) {
             continue
         }
 
+        # Convert UTC epoch to target timezone
+        if ($DefaultTimezone -eq "UTC") {
+            # Keep as UTC
+        }
+        else {
+            # Convert to target timezone offset (simplified: apply +08:00 for Asia/Shanghai)
+            $dt = $dt.ToOffset([TimeSpan]::FromHours(8))
+        }
+
         # Check for anomalies
         if ($dt.Year -lt 2000 -or $dt.Year -gt ($now.Year + $AnomalyThresholdYears)) {
             $entry.anomaly = $true
@@ -101,11 +110,13 @@ foreach ($msg in $messages) {
             $entry.precision = "parsed"
         }
         elseif ([DateTime]::TryParse($rawTimestamp, [ref]$null)) {
-            # No timezone info, assume default
+            # No timezone info — mark as assumed, don't silently hardcode
             $dt = [DateTime]::Parse($rawTimestamp)
-            $entry.normalized_timestamp = $dt.ToString("yyyy-MM-ddTHH:mm:ss") + "+08:00"
+            $tzOffset = "+08:00"  # Default for Asia/Shanghai
+            if ($DefaultTimezone -eq "UTC") { $tzOffset = "+00:00" }
+            $entry.normalized_timestamp = $dt.ToString("yyyy-MM-ddTHH:mm:ss") + $tzOffset
             $entry.precision = "date-only-assumed-tz"
-            $warnings += "No timezone in '$rawTimestamp', assuming $DefaultTimezone"
+            $warnings += "No timezone in timestamp '$rawTimestamp', assumed $DefaultTimezone ($tzOffset). Manual review recommended."
         }
         else {
             $warnings += "Cannot parse timestamp: $rawTimestamp"

@@ -1,6 +1,6 @@
 # detect_cross_relationship_leakage.ps1
 # Scan memory records for potential cross-relationship data leakage:
-# - Same person ID referenced by multiple relationships unexpectedly
+# - Same person ID referenced by multiple relationships
 # - Personal details appearing in wrong relationship context
 # - Missing isolation between relationship directories
 param(
@@ -45,10 +45,10 @@ if (Test-Path $peopleDir) {
 
 # 2. Check relationships/ directory isolation
 $relationshipsDir = Join-Path $DataRoot "relationships"
+$relationshipPersonMap = @{}  # relationship_id → @(person_ids)
 if (Test-Path $relationshipsDir) {
     $relationshipDirs = Get-ChildItem $relationshipsDir -Directory
 
-    # Check that each relationship directory is self-contained
     foreach ($relDir in $relationshipDirs) {
         $relId = $relDir.Name
 
@@ -63,22 +63,46 @@ if (Test-Path $relationshipsDir) {
             }
         }
 
-        # Read overview.md for relationship_id references
+        # Read overview.md for person references
         $overviewPath = Join-Path $relDir.FullName "overview.md"
+        $relPersonIds = @()
         if (Test-Path $overviewPath) {
             $overview = Get-Content $overviewPath -Raw
             # Extract person references (p-* stable IDs)
             $personRefs = [regex]::Matches($overview, 'p-\d{8}T\d{6}[+-]\d{4}-[a-z0-9]{4}')
             foreach ($ref in $personRefs) {
+                $relPersonIds += $ref.Value
                 if (-not $personIds.ContainsKey($ref.Value)) {
                     $findings += "Relationship '$relId' references person '$($ref.Value)' not found in people/"
                 }
             }
         }
+        $relationshipPersonMap[$relId] = $relPersonIds
     }
 
-    # 3. Check for cross-relationship references
-    # Each relationship directory should only reference its own events/conversations
+    # 3. CORE CHECK: same person ID across multiple relationships
+    Write-Host "  People records:    $($personIds.Count)"
+    Write-Host "  Relationships:     $($relationshipDirs.Count)"
+
+    $personToRelationships = @{}
+    foreach ($relId in $relationshipPersonMap.Keys) {
+        foreach ($personId in $relationshipPersonMap[$relId]) {
+            if (-not $personToRelationships.ContainsKey($personId)) {
+                $personToRelationships[$personId] = @()
+            }
+            $personToRelationships[$personId] += $relId
+        }
+    }
+
+    foreach ($personId in $personToRelationships.Keys) {
+        $relCount = $personToRelationships[$personId].Count
+        if ($relCount -gt 1) {
+            $relList = $personToRelationships[$personId] -join ', '
+            $findings += "INFO: Person '$personId' referenced by $relCount relationships: [$relList]. This may be intentional (same person, different stages) — verify it's not a data leak."
+        }
+    }
+
+    # 4. Check for cross-relationship references in file content
     foreach ($relDir in $relationshipDirs) {
         $relId = $relDir.Name
         $allContent = ""
@@ -98,7 +122,7 @@ if (Test-Path $relationshipsDir) {
     }
 }
 
-# 4. Check exports/ doesn't contain raw sensitive data
+# 5. Check exports/ doesn't contain raw sensitive data
 $exportsDir = Join-Path $DataRoot "exports"
 if (Test-Path $exportsDir) {
     $exportFiles = Get-ChildItem $exportsDir -Recurse
@@ -112,9 +136,6 @@ if (Test-Path $exportsDir) {
 }
 
 # Report
-Write-Host "  People records:   $($personIds.Count)"
-Write-Host "  Relationships:    $(if (Test-Path $relationshipsDir) { (Get-ChildItem $relationshipsDir -Directory).Count } else { 0 })"
-
 if ($findings.Count -eq 0) {
     Write-Host "`nNo cross-relationship leakage detected." -ForegroundColor Green
 }
