@@ -22,7 +22,7 @@ else {
         $errors += "SKILL.md missing YAML frontmatter (must start with ---)"
     }
     # Check name/description in the YAML frontmatter block (first ---...---), not elsewhere
-    if ($skillContent -match '^---\s*\n(.*?)\n---') {
+    if ($skillContent -match '(?s)^---\s*\n(.*?)\n---') {
         $frontmatter = $Matches[1]
         if ($frontmatter -notmatch 'name:\s*love-me') {
             $errors += "SKILL.md frontmatter YAML block missing 'name: love-me'"
