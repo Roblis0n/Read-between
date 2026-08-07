@@ -1,7 +1,7 @@
-# love-me v1 迭代报告
+# read-between v1 迭代报告
 
 - 迭代日期：2026-08-06
-- 基线版本：`324e7a4`（Initial commit: love-me skill v0）
+- 基线版本：`324e7a4`（Initial commit: read-between skill v0）
 - 最终版本：`74c4f18`
 - 总提交数：8 次（含初始提交）
 - 验证状态：`validate_contract.ps1` — All checks passed
@@ -40,7 +40,7 @@ v0 版本在关系分析、追求决策、消息代拟等核心能力上已经�
 
 | 改前 | 改后 |
 |------|------|
-| "love-me 不上传、不共享、不用于训练" | 三层数据路径说明：对话经模型API→平台管理；文件读写→skill控制；外部工具→披露后征得同意 |
+| "read-between 不上传、不共享、不用于训练" | 三层数据路径说明：对话经模型API→平台管理；文件读写→skill控制；外部工具→披露后征得同意 |
 | "所有分析和建议在本地完成（通过 Claude/Codex 的本地推理能力）" | "文件读写在本设备完成。分析和建议由AI模型处理（通常经远端API）" |
 | "不保存X……除非用户确认" | 密码/私密影像/身份证号/精确位置 → 绝对禁止保存，不设例外 |
 
@@ -133,11 +133,11 @@ v0 版本在关系分析、追求决策、消息代拟等核心能力上已经�
 |------|------|
 | `SKILL.md` description | 623字符→~350字符；删除异地恋/复合/记忆管理等未实现能力 |
 | `SKILL.md` 工作流 | 新增快速路径（简单代拟不走完整intent+lifecycle）；记忆步骤改为用户主动触发 |
-| `references/data-root.txt` | `D:\Codex work\...` → `./love-me-data/` |
+| `references/data-root.txt` | `D:\Codex work\...` → `./read-between-data/` |
 | `references/past-wis-bridge.md` | 删除3个D:\盘硬编码路径；改为skill名引用+未安装时降级 |
 | `references/early-dating.md` | "邀请方主动承担费用是礼貌的"→文化中性表述 |
 | `references/partnership-marriage-overview.md` | "女方承担更多"→"在许多文化中不成比例地落在其中一方"；"第一优先级"→"重要优先级之一" |
-| 研发资料移出 | research-packet.json (745KB)、research-report.md、plan.md、gemini1-4.txt → `../love-me-research/` |
+| 研发资料移出 | research-packet.json (745KB)、research-report.md、plan.md、gemini1-4.txt → `../read-between-research/` |
 
 ---
 
@@ -147,7 +147,7 @@ v0 版本在关系分析、追求决策、消息代拟等核心能力上已经�
 |------|------|
 | `LICENSE` | MIT |
 | `README.md` | 诚实版能力清单、快速开始、目录结构、past-wis关系、Roadmap、免责声明 |
-| `.gitignore` | `love-me-data/` + `*.log` |
+| `.gitignore` | `read-between-data/` + `*.log` |
 
 ---
 

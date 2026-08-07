@@ -9,7 +9,7 @@ $skillRoot = Resolve-Path "$SkillRoot\.."
 $errors = @()
 $warnings = @()
 
-Write-Host "=== love-me Contract Validation ===" -ForegroundColor Cyan
+Write-Host "=== read-between Contract Validation ===" -ForegroundColor Cyan
 
 # 1. Check SKILL.md exists and has valid frontmatter
 $skillMdPath = Join-Path $skillRoot "SKILL.md"
@@ -24,8 +24,8 @@ else {
     # Check name/description in the YAML frontmatter block (first ---...---), not elsewhere
     if ($skillContent -match '(?s)^---\s*\n(.*?)\n---') {
         $frontmatter = $Matches[1]
-        if ($frontmatter -notmatch 'name:\s*love-me') {
-            $errors += "SKILL.md frontmatter YAML block missing 'name: love-me'"
+        if ($frontmatter -notmatch 'name:\s*read-between') {
+            $errors += "SKILL.md frontmatter YAML block missing 'name: read-between'"
         }
         if ($frontmatter -notmatch 'description:\s*[>|]') {
             $warnings += "SKILL.md description should use YAML folded scalar (> ) or literal (| ) for multi-line triggers"

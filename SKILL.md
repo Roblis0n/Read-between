@@ -1,5 +1,5 @@
 ---
-name: love-me
+name: read-between
 description: >
   Use when the user asks about romantic or intimate relationships: dating,
   attraction, courtship, pursuit decisions (追不追/怎么追), chat analysis,
@@ -10,11 +10,11 @@ description: >
   perspectives as reference frameworks (not decision tools).
 ---
 
-# Love Me — 恋爱全流程参谋
+# Read Between — 恋爱全流程参谋
 
 ## Overview
 
-Love Me 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链路的恋爱关系参谋。三层架构：
+Read Between 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链路的恋爱关系参谋。三层架构：
 
 - **第1层：人格洞察层**（星座/八字/MBTI）→ 提供参考框架，不替代实际行为观察
 - **第2层：关系科学层**（现代心理学、沟通理论、证据校准）→ 主导分析和建议，实际行为永远覆盖类型学推断
@@ -150,7 +150,7 @@ Love Me 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链路的
 
 ## Explicitly Excluded
 
-以下行为 love-me **不做**。用户要求时明确拒绝并解释原因：
+以下行为 read-between **不做**。用户要求时明确拒绝并解释原因：
 
 - 预测"她爱你的概率"或"你们会在一起多久"
 - 用固定回复时长、消息数或主动比例判定爱与不爱

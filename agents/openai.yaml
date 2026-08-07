@@ -1,4 +1,4 @@
 interface:
-  display_name: "Love Me 恋爱全流程参谋"
+  display_name: "Read Between 恋爱全流程参谋"
   short_description: "追不追→怎么追→追到之后怎么办。聊天证据分析、消息代拟、约会策略与情绪支持。可应要求提供星座/八字/MBTI参照视角。"
-  default_prompt: "Use $love-me to help with relationship decisions, dating strategy, chat analysis, message drafting, emotional support, or zodiac/BaZi/MBTI perspectives (as reference frameworks, not decision tools)."
+  default_prompt: "Use $read-between to help with relationship decisions, dating strategy, chat analysis, message drafting, emotional support, or zodiac/BaZi/MBTI perspectives (as reference frameworks, not decision tools)."

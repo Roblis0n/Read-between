@@ -1,24 +1,24 @@
 # Past-Wis Bridge — 古籍桥接
 
-love-me 不照搬 past-wis 的完整检索流程。古籍在 love-me 中的定位是"点缀与辅助"——在需要时为现代关系洞察提供古典维度的参照，而非作为主要证据来源。
+read-between 不照搬 past-wis 的完整检索流程。古籍在 read-between 中的定位是"点缀与辅助"——在需要时为现代关系洞察提供古典维度的参照，而非作为主要证据来源。
 
 ## 资源位置
 
-love-me 通过 skill 名引用 past-wis，而非硬编码路径。
+read-between 通过 skill 名引用 past-wis，而非硬编码路径。
 
 - **past-wis Skill**：如果已安装，通过 `past-wis` skill 名调用
-- **古籍正文**：由 past-wis skill 管理，love-me 不直接读取
+- **古籍正文**：由 past-wis skill 管理，read-between 不直接读取
 - **准入古籍清单**：由 past-wis skill 维护
 
-**如果 past-wis 未安装**：古籍功能不可用。love-me 在用户请求古籍视角时会说明这一点，并继续用现代知识体系提供建议。不编造古文。
+**如果 past-wis 未安装**：古籍功能不可用。read-between 在用户请求古籍视角时会说明这一点，并继续用现代知识体系提供建议。不编造古文。
 
-## love-me 的古籍使用策略
+## read-between 的古籍使用策略
 
 ### 不用 past-wis 的什么
 
 - ❌ 不用2轮检索流程（4路召回→80-150候选池→12-24精读）
 - ❌ 不用反证搜索和引文凭条制度
-- ❌ 不用古雅白话风格——love-me 始终使用温暖现代汉语
+- ❌ 不用古雅白话风格——read-between 始终使用温暖现代汉语
 - ❌ 不用416条完整目录的大部分条目
 - ❌ 不把古籍当作"决策证据"——古籍是"参考视角"
 
@@ -30,7 +30,7 @@ love-me 通过 skill 名引用 past-wis，而非硬编码路径。
 
 ## 感情相关预筛选清单
 
-以下是从 evidence-catalog.tsv 中筛选的对 love-me 最有用的文本（约30条核心清单）。当用户需要古籍视角时，优先从这些文本中读取。
+以下是从 evidence-catalog.tsv 中筛选的对 read-between 最有用的文本（约30条核心清单）。当用户需要古籍视角时，优先从这些文本中读取。
 
 ### 诗词与情感表达
 
