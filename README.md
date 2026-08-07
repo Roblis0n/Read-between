@@ -2,6 +2,8 @@
 
 > 追不追 → 怎么追 → 追到之后怎么办
 
+[English](README.en.md) · 中文
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-v1.0-blue.svg)](CHANGELOG-v1.md)
 
@@ -101,12 +103,6 @@ read-between/
 | `validate_record.ps1` | 验证记忆记录的字段完整性和格式 | 写入记忆后 |
 | `validate_memory_store.ps1` | 检查记忆目录结构完整性 | 首次使用、数据目录变更后 |
 | `detect_cross_relationship_leakage.ps1` | 检测不同关系档案间的人物信息泄漏 | 维护多段关系档案时 |
-
-## 与 past-wis 的关系
-
-read-between 可通过 `past-wis-bridge.md` 桥接到 [past-wis](https://github.com/robolis0n/past-wis) skill，在用户明确要求古籍视角时提供《诗经》《世说新语》《菜根谭》等感情相关文本的参照。古籍在 read-between 中的角色是"参考视角"，不是决策证据。
-
-**如果 past-wis 未安装**：古籍功能不可用，read-between 会说明这一点并继续用现代知识体系提供建议。
 
 ## 进一步阅读
 

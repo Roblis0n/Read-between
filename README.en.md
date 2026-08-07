@@ -105,12 +105,6 @@ Seven PowerShell scripts covering the full pipeline from format checking to priv
 | `validate_memory_store.ps1` | Check memory directory structure integrity | First use, after data directory changes |
 | `detect_cross_relationship_leakage.ps1` | Detect person-info leakage across relationship profiles | When maintaining multiple relationship archives |
 
-## Relationship with past-wis
-
-Read Between bridges to [past-wis](https://github.com/robolis0n/past-wis) via `past-wis-bridge.md`. When the user explicitly requests a classical Chinese perspective, it can draw on love-and-relationship texts from sources like the *Book of Songs* (诗经), *A New Account of the Tales of the World* (世说新语), and *Caigentan* (菜根谭). Classical texts serve as reference perspectives, not decision evidence.
-
-**If past-wis is not installed**: classical-text features are unavailable. Read Between will state this clearly and continue with modern knowledge.
-
 ## Further Reading
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — Runtime logic flowchart, design principles, 3-tier insight architecture, divergence from original plan, competitive differentiation
