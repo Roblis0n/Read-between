@@ -25,7 +25,7 @@ No mind-reading. No success-rate predictions. No manipulation tactics.
 | 📚 Relationship education | Attachment, boundaries, consent, trust, communication, jealousy — modern relationship knowledge |
 | 🏠 Long-term partnership & marriage | Cohabitation, marriage, division of labor, joint decisions — summary-level support |
 | 🔮 Zodiac / BaZi / MBTI | Available on request as reference frameworks — symbolic lenses, not predictions or verdicts |
-| 📜 Classical wisdom | Bridge to the [past-wis](https://github.com/robolis0n/past-wis) skill for perspective from classical Chinese texts on love and relationships |
+| 📜 Classical reference | Built-in classical corpus — 10 source texts including *Shijing*, *Shishuo Xinyu*, *Caigentan*; agent-driven retrieval and interpretation; five voice styles adaptively matched; extended thinking + web search for modern reference |
 | 🛡️ Safety triage | Violence, coercion, self-harm, stalking, intimate image threats, minors, power imbalance — overrides all ordinary relationship advice |
 
 ### What Read Between Won't Do
@@ -76,7 +76,21 @@ read-between/
 │   ├── privacy-threat-model.md     # Privacy threat model
 │   ├── memory-protocol.md          # Session memory & user-controlled archiving
 │   ├── personality-insight-layer.md # Zodiac / BaZi / MBTI reference perspectives
-│   ├── past-wis-bridge.md          # Classical wisdom bridge
+│   ├── classical-interpretation.md  # Classical interpretation rules & scene routing
+│   ├── classical-voices.md         # Five classical voice styles
+│   ├── classical-catalog.md        # Classical corpus navigation catalog
+│   ├── classical-corpus/           # 10 full classical source texts
+│   │   ├── _README.md
+│   │   ├── 诗经.md
+│   │   ├── 世说新语.md
+│   │   ├── 菜根谭.md
+│   │   ├── 小窗幽记.md
+│   │   ├── 围炉夜话.md
+│   │   ├── 论语.md
+│   │   ├── 庄子.md
+│   │   ├── 道德经.md
+│   │   ├── 孟子.md
+│   │   └── 乐府诗集.md
 │   ├── source-registry.md          # Knowledge source registry
 │   ├── lifecycle-routing.md        # Full-lifecycle state machine
 │   ├── output-contracts.md         # Output format contracts
@@ -104,6 +118,7 @@ Seven PowerShell scripts covering the full pipeline from format checking to priv
 | `validate_record.ps1` | Validate memory record field completeness and format | After writing memories |
 | `validate_memory_store.ps1` | Check memory directory structure integrity | First use, after data directory changes |
 | `detect_cross_relationship_leakage.ps1` | Detect person-info leakage across relationship profiles | When maintaining multiple relationship archives |
+| `search_classics.ps1` | Cross-search classical source texts by keyword, return hit locations and context | When classical reference is needed |
 
 ## Further Reading
 

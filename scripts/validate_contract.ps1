@@ -1,4 +1,4 @@
-# validate_contract.ps1
+﻿# validate_contract.ps1
 # Static verification: check all referenced files exist, SKILL.md frontmatter is valid,
 # cross-references are complete, and no orphan files exist.
 param(
@@ -69,20 +69,66 @@ $expectedRefs = @(
     "privacy-threat-model.md",
     "memory-protocol.md",
     "source-registry.md",
-    "past-wis-bridge.md",
-    "output-contracts.md",
-    "personality-insight-layer.md",
-    "data-root.txt"
+    "past-wis-bridge.md"
 )
-
+$deprecatedRefs = @{
+    "past-wis-bridge.md" = "DEPRECATED: replaced by classical-interpretation.md + classical-corpus/ + classical-catalog.md + classical-voices.md. Kept for historical reference only."
+}
 $refsDir = Join-Path $skillRoot "references"
 foreach ($ref in $expectedRefs) {
+    $refPath = Join-Path $refsDir $ref
+    if (-not (Test-Path $refPath)) {
+        if ($deprecatedRefs.ContainsKey($ref)) {
+            $warnings += "Deprecated file found (kept for historical reference): references/$ref — $($deprecatedRefs[$ref])"
+        }
+        else {
+            $errors += "Missing reference file: references/$ref"
+        }
+    }
+    elseif ($deprecatedRefs.ContainsKey($ref)) {
+        $warnings += "Deprecated file still present (kept for historical reference): references/$ref — $($deprecatedRefs[$ref])"
+    }
+}
+# Classical corpus files (references/classical-corpus/)
+$classicalCorpusDir = Join-Path $refsDir "classical-corpus"
+$expectedClassicalFiles = @(
+    "_README.md",
+    "诗经.md",
+    "世说新语.md",
+    "菜根谭.md",
+    "小窗幽记.md",
+    "围炉夜话.md",
+    "论语.md",
+    "庄子.md",
+    "道德经.md",
+    "孟子.md",
+    "乐府诗集.md"
+)
+$expectedClassicalRefs = @(
+    "classical-interpretation.md",
+    "classical-catalog.md",
+    "classical-voices.md"
+)
+# Check classical-interpretation.md and other new reference files
+foreach ($ref in $expectedClassicalRefs) {
     $refPath = Join-Path $refsDir $ref
     if (-not (Test-Path $refPath)) {
         $errors += "Missing reference file: references/$ref"
     }
 }
-Write-Host "  [OK] Checked $($expectedRefs.Count) expected reference files" -ForegroundColor Green
+# Check classical-corpus/ directory
+if (-not (Test-Path $classicalCorpusDir)) {
+    $errors += "Missing directory: references/classical-corpus/"
+}
+else {
+    foreach ($file in $expectedClassicalFiles) {
+        $filePath = Join-Path $classicalCorpusDir $file
+        if (-not (Test-Path $filePath)) {
+            $errors += "Missing classical corpus file: references/classical-corpus/$file"
+        }
+    }
+}
+Write-Host "  [OK] Checked $($expectedRefs.Count) expected reference files + $($expectedClassicalRefs.Count) classical refs + $($expectedClassicalFiles.Count) corpus files" -ForegroundColor Green
 
 # 4. Check SKILL.md references match actual files + detect orphans
 if (Test-Path $skillMdPath) {
@@ -103,6 +149,14 @@ if (Test-Path $skillMdPath) {
             $warnings += "Orphan reference file: references/$file is not referenced in SKILL.md"
         }
     }
+
+    # Cross-reference check: SKILL.md should reference classical-interpretation.md (not past-wis-bridge.md for classical routing)
+    if ($skillContent -notmatch 'classical-interpretation\.md') {
+        $errors += "SKILL.md does not reference classical-interpretation.md (classical self-service layer)"
+    }
+    if ($skillContent -match 'past-wis-bridge\.md' -and $skillContent -notmatch '<!-- DEPRECATED') {
+        $warnings += "SKILL.md still references past-wis-bridge.md — should point to classical-interpretation.md instead"
+    }
 }
 
 # 5. Check scripts directory
@@ -114,7 +168,8 @@ $expectedScripts = @(
     "redact_transcript.ps1",
     "validate_record.ps1",
     "validate_memory_store.ps1",
-    "detect_cross_relationship_leakage.ps1"
+    "detect_cross_relationship_leakage.ps1",
+    "search_classics.ps1"
 )
 foreach ($script in $expectedScripts) {
     $scriptPath = Join-Path $scriptsDir $script

@@ -1,3 +1,4 @@
+<!-- DEPRECATED: This file has been replaced by classical-interpretation.md + classical-corpus/ + classical-catalog.md + classical-voices.md. The past-wis external skill bridge is no longer used. This file is retained for historical reference only. See CLASSICAL-LAYER-PLAN.md in advice/1/ for the full migration plan. -->
 # Past-Wis Bridge — 古籍桥接
 
 read-between 不照搬 past-wis 的完整检索流程。古籍在 read-between 中的定位是"点缀与辅助"——在需要时为现代关系洞察提供古典维度的参照，而非作为主要证据来源。

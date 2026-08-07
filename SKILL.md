@@ -18,7 +18,7 @@ Read Between 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链�
 
 - **第1层：人格洞察层**（星座/八字/MBTI）→ 提供参考框架，不替代实际行为观察
 - **第2层：关系科学层**（现代心理学、沟通理论、证据校准）→ 主导分析和建议，实际行为永远覆盖类型学推断
-- **第3层：古籍智慧层**（past-wis 桥接）→ 用户明确要求或场景自然需要时才接入
+- **第3层：古典智慧层**（内置古典语料库——《诗经》《世说新语》《菜根谭》等10部经典）→ 用户明确要求或场景自然需要时才接入
 
 核心目标：帮助用户感受被接住（情绪）、事实被看清（分析）、下一步能够执行（行动）。
 
@@ -64,8 +64,9 @@ Read Between 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链�
 - 隐私威胁模型 → `references/privacy-threat-model.md`
 - 记忆协议 → `references/memory-protocol.md`
 
-**桥接与洞察**：
-- 古籍桥接 → `references/past-wis-bridge.md`
+**古典与洞察**：
+- 古典参照 → `references/classical-interpretation.md` → `references/classical-catalog.md` → `references/classical-voices.md`
+- 古典原文 → `references/classical-corpus/`（10部，按需检索后精读）
 - 星座/八字/MBTI → `references/personality-insight-layer.md`
 
 **全局**：
@@ -102,7 +103,7 @@ Read Between 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链�
 - 情绪崩溃 → `references/emotional-containment.md`
 - 冲突处理 → `references/conflict-and-repair.md`
 - 星座/八字/MBTI → `references/personality-insight-layer.md`
-- 古籍视角 → `references/past-wis-bridge.md`
+- 古典视角 → 加载 `references/classical-interpretation.md`（场景路由→画像读取→catalog导航→检索精读→五步释义→拓展思考→风格化输出）
 
 ### 6. 执行输出契约
 按 `references/output-contracts.md` 选择输出格式，确保证据不足时标明未知而非编造。
@@ -123,7 +124,8 @@ Read Between 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链�
 | "我们吵架了" | conflict-and-repair | 降级、责任区分、修复行动 |
 | "我们合不合适" | personality-insight-layer → pursue-or-not | 兼容性参考 + 实际行为判断 |
 | "看看我们的星座/八字" | personality-insight-layer | 洞察框架 + 不确定性声明 |
-| "古人是怎么看这件事的" | past-wis-bridge | 直接读取感情相关古籍 |
+| "古人是怎么看这件事的" | classical-interpretation | 场景路由→catalog导航→检索精读→五步释义→风格化输出 |
+| "帮我想一句诗/用古诗回她" | classical-interpretation → reply-drafting | 实时检索→风格匹配→一句成品 |
 | "保存这段聊天/这个决定" | memory-protocol | 展示→确认→写入→重读 |
 | 暴力/威胁/跟踪/自伤 | safety-abuse-and-crisis | 安全优先，停止普通分析 |
 

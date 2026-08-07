@@ -25,7 +25,7 @@
 | 📚 关系教育 | 依恋、边界、同意、信任、沟通、嫉妒等现代关系知识体系 |
 | 🏠 长期伴侣与婚姻 | 同居、婚姻、分工、共同决策——概要级支持 |
 | 🔮 星座/八字/MBTI | 可应要求提供参照视角——符号框架，不预测、不判决、不替代行为观察 |
-| 📜 古籍参照 | 通过 past-wis skill 桥接——《诗经》《世说新语》《菜根谭》等感情相关文本的参照 |
+| 📜 古典参照 | 内置古典语料库——《诗经》《世说新语》《菜根谭》等10部经典原文，agent自主检索释义，五声音格自适应，拓展性思考+联网现代参照 |
 | 🛡️ 安全分流 | 暴力/胁迫/自伤/跟踪/私密影像威胁/未成年人/权力差——覆盖普通恋爱策略 |
 
 ### 明确不做的
@@ -75,7 +75,21 @@ read-between/
 │   ├── privacy-threat-model.md     # 隐私威胁模型
 │   ├── memory-protocol.md          # 会话记忆与用户自主存档
 │   ├── personality-insight-layer.md # 星座/八字/MBTI 参照视角
-│   ├── past-wis-bridge.md          # 古籍桥接
+│   ├── classical-interpretation.md  # 古典释义规则与场景路由
+│   ├── classical-voices.md         # 五种古典声音系统
+│   ├── classical-catalog.md        # 古典语料库导航目录
+│   ├── classical-corpus/           # 10部古典原文
+│   │   ├── _README.md
+│   │   ├── 诗经.md
+│   │   ├── 世说新语.md
+│   │   ├── 菜根谭.md
+│   │   ├── 小窗幽记.md
+│   │   ├── 围炉夜话.md
+│   │   ├── 论语.md
+│   │   ├── 庄子.md
+│   │   ├── 道德经.md
+│   │   ├── 孟子.md
+│   │   └── 乐府诗集.md
 │   ├── source-registry.md          # 知识来源注册表
 │   ├── lifecycle-routing.md        # 全生命周期状态机
 │   ├── output-contracts.md         # 输出契约
@@ -103,6 +117,7 @@ read-between/
 | `validate_record.ps1` | 验证记忆记录的字段完整性和格式 | 写入记忆后 |
 | `validate_memory_store.ps1` | 检查记忆目录结构完整性 | 首次使用、数据目录变更后 |
 | `detect_cross_relationship_leakage.ps1` | 检测不同关系档案间的人物信息泄漏 | 维护多段关系档案时 |
+| `search_classics.ps1` | 跨古典原文关键词检索，返回命中位置与上下文 | 需要古典参照时 |
 
 ## 进一步阅读
 
