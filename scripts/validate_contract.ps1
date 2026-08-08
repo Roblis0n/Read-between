@@ -54,6 +54,8 @@ else {
 $expectedRefs = @(
     "lifecycle-routing.md",
     "intent-insight.md",
+    "genuine-intent.md",
+    "self-deception-taxonomy.md",
     "pursue-or-not.md",
     "pursuit-strategy.md",
     "early-dating.md",
