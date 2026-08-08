@@ -5,7 +5,7 @@
 [English](README.en.md) · 中文
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-v1.0-blue.svg)](CHANGELOG-v1.md)
+[![Version](https://img.shields.io/badge/version-v3.0-blue.svg)](CHANGELOG-v1.md)
 
 一个覆盖恋爱全生命周期的 Claude Code / Codex Skill。帮助用户在亲密关系中同时做到：**感受被接住、事实被看清、下一步能执行**。
 
@@ -27,6 +27,7 @@
 | 🔮 星座/八字/MBTI | 可应要求提供参照视角——符号框架，不预测、不判决、不替代行为观察 |
 | 📜 古典参照 | 内置古典语料库——《诗经》《世说新语》《菜根谭》等10部经典原文，agent自主检索释义，五声音格自适应，拓展性思考+联网现代参照 |
 | 🛡️ 安全分流 | 暴力/胁迫/自伤/跟踪/私密影像威胁/未成年人/权力差——覆盖普通恋爱策略 |
+| 🪞 真实意图识别 | 当用户表层请求与深层需求存在差距时，温和反映而非戳穿——用户有权否认。唯一例外：以在乎为名的控制行为必须被明确命名 |
 
 ### 明确不做的
 
@@ -35,6 +36,7 @@
 - 不教 PUA/推拉/制造嫉妒/冷暴力/人格克隆
 - 不自动保存聊天记录
 - 不替用户做最终决定
+- 不戳穿用户的自我保护叙事——反映差距，不贴标签
 
 ## 快速开始
 
@@ -58,8 +60,10 @@ read-between/
 ├── .gitignore
 ├── agents/
 │   └── openai.yaml             # 界面元数据
-├── references/                 # 24 个按需加载的深度指令（含古典层）
+├── references/                 # 26 个按需加载的深度指令（含古典层与真实意图检测）
 │   ├── intent-insight.md           # 意图识别与真实意图洞察
+│   ├── genuine-intent.md           # 真实意图检测执行入口（触发条件、速查表、处理流程）
+│   ├── self-deception-taxonomy.md  # 10类自我欺骗模式完整分类（语言信号四层拆解、响应策略、谱系）
 │   ├── pursue-or-not.md            # 追/不追五步决策框架
 │   ├── pursuit-strategy.md         # 追求四阶段全链路
 │   ├── early-dating.md             # 早期约会与关系建立
@@ -92,7 +96,7 @@ read-between/
 │   │   └── 乐府诗集.md
 │   ├── source-registry.md          # 知识来源注册表
 │   ├── lifecycle-routing.md        # 全生命周期状态机
-│   ├── output-contracts.md         # 输出契约
+│   ├── output-contracts.md         # 输出契约（含多对象比较模式）
 │   └── data-root.txt               # 数据目录路径
 └── scripts/                    # 8 个 PowerShell 验证工具
     ├── validate_contract.ps1        # 静态契约验证（文件存在性 + 交叉引用完整性）
@@ -101,7 +105,8 @@ read-between/
     ├── redact_transcript.ps1        # 聊天记录去标识化
     ├── validate_record.ps1          # 记忆记录格式验证
     ├── validate_memory_store.ps1    # 记忆存储完整性验证
-    └── detect_cross_relationship_leakage.ps1  # 跨关系信息泄漏检测
+    ├── detect_cross_relationship_leakage.ps1  # 跨关系信息泄漏检测
+    └── search_classics.ps1          # 古典原文关键词检索
 ```
 
 ## 验证工具
@@ -132,6 +137,13 @@ read-between/
 - [ ] 异地恋策略独立模块
 - [ ] 分手恢复与复合评估独立模块
 - [ ] 更全面的性别与关系形态中性化
+- [ ] 古典层作为可选扩展包（当前内置 ~26,000 行语料）
+- [x] 多对象比较与优先级排序（v2）
+- [x] 用户预分析模式识别与拆解（v2）
+- [x] 事后回忆输入类型（v2）
+- [x] 完整对话导出（v2）
+- [x] 发展关系前置条件检查——第零步（v2）
+- [x] 真实意图识别层——10类自我欺骗模式检测（v3）
 
 ## 免责声明
 

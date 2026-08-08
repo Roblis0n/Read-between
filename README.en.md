@@ -5,7 +5,7 @@
 English · [中文](README.md)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-v1.0-blue.svg)](CHANGELOG-v1.md)
+[![Version](https://img.shields.io/badge/version-v3.0-blue.svg)](CHANGELOG-v1.md)
 
 A Claude Code / Codex Skill covering the full relationship lifecycle. Helps you do three things at once: **feel held, see clearly, take the next step**.
 
@@ -27,6 +27,7 @@ No mind-reading. No success-rate predictions. No manipulation tactics.
 | 🔮 Zodiac / BaZi / MBTI | Available on request as reference frameworks — symbolic lenses, not predictions or verdicts |
 | 📜 Classical reference | Built-in classical corpus — 10 source texts including *Shijing*, *Shishuo Xinyu*, *Caigentan*; agent-driven retrieval and interpretation; five voice styles adaptively matched; extended thinking + web search for modern reference |
 | 🛡️ Safety triage | Violence, coercion, self-harm, stalking, intimate image threats, minors, power imbalance — overrides all ordinary relationship advice |
+| 🪞 Genuine intent detection | When a user's stated goal conflicts with their described behavior, gently reflects the gap rather than exposing it — users have the right to deny. Only exception: control disguised as care must be explicitly named |
 
 ### What Read Between Won't Do
 
@@ -35,6 +36,7 @@ No mind-reading. No success-rate predictions. No manipulation tactics.
 - Won't teach PUA tactics, push-pull, jealousy games, silent treatment, or personality cloning
 - Won't auto-save chat logs
 - Won't make the final decision for you
+- Won't expose users' self-protective narratives — reflects gaps, never labels
 
 ## Quick Start
 
@@ -59,8 +61,10 @@ read-between/
 ├── .gitignore
 ├── agents/
 │   └── openai.yaml             # Interface metadata
-├── references/                 # 24 on-demand reference files (incl. classical layer)
+├── references/                 # 26 on-demand reference files (incl. classical layer & genuine intent detection)
 │   ├── intent-insight.md           # Intent recognition & genuine need insight
+│   ├── genuine-intent.md           # Genuine intent detection entry point (triggers, quick-ref table, processing flow)
+│   ├── self-deception-taxonomy.md  # 10 self-deception patterns with full linguistic signal analysis, response strategies, and spectrums
 │   ├── pursue-or-not.md            # 5-step pursue-or-not decision framework
 │   ├── pursuit-strategy.md         # 4-phase pursuit roadmap
 │   ├── early-dating.md             # Early dating & relationship formation
@@ -93,7 +97,7 @@ read-between/
 │   │   └── 乐府诗集.md
 │   ├── source-registry.md          # Knowledge source registry
 │   ├── lifecycle-routing.md        # Full-lifecycle state machine
-│   ├── output-contracts.md         # Output format contracts
+│   ├── output-contracts.md         # Output format contracts (incl. multi-prospect comparison mode)
 │   └── data-root.txt               # Data directory path
 └── scripts/                    # 8 PowerShell validation tools
     ├── validate_contract.ps1        # Static contract validation (file existence + cross-reference integrity)
@@ -102,7 +106,8 @@ read-between/
     ├── redact_transcript.ps1        # Chat transcript de-identification
     ├── validate_record.ps1          # Memory record format validation
     ├── validate_memory_store.ps1    # Memory store integrity check
-    └── detect_cross_relationship_leakage.ps1  # Cross-relationship information leakage detection
+    ├── detect_cross_relationship_leakage.ps1  # Cross-relationship information leakage detection
+    └── search_classics.ps1          # Classical source text keyword search
 ```
 
 ## Validation Tools
@@ -134,6 +139,13 @@ The following are not committed in the skill description but are natural extensi
 - [ ] Long-distance relationship strategy (standalone module)
 - [ ] Breakup recovery & reconciliation assessment (standalone module)
 - [ ] More comprehensive gender and relationship-structure neutrality
+- [ ] Classical layer as optional extension pack (currently ~26,000 lines built-in)
+- [x] Multi-prospect comparison & prioritization (v2)
+- [x] User pre-analysis mode recognition & deconstruction (v2)
+- [x] Retrospective narrative input type (v2)
+- [x] Full conversation export (v2)
+- [x] Relationship prerequisite checks — Step Zero (v2)
+- [x] Genuine intent detection layer — 10 self-deception patterns (v3)
 
 ## Disclaimer
 
