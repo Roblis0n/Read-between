@@ -175,7 +175,12 @@ v0 版本在关系分析、追求决策、消息代拟等核心能力上已经�
 - [ ] 异地恋策略独立模块
 - [ ] 分手恢复与复合评估独立模块
 - [ ] 更全面的性别与关系形态中性化（当前只在集中文件修复了关键表述）
-- [ ] past-wis 桥接的运行时验证（当前依赖 past-wis skill 已安装）
+- [x] past-wis 桥接的运行时验证 → **v2 已解决**：古典层已改为内置自服务（classical-interpretation.md + corpus/ + search_classics.ps1），不再依赖外部 past-wis skill
+- [x] 多对象比较与优先级排序 → **v2 已实现**（pursue-or-not.md 第六步 + output-contracts.md 第五种模式）
+- [x] 用户预分析模式识别与拆解 → **v2 已实现**（intent-insight.md A2 子类型）
+- [x] 事后回忆输入类型 → **v2 已实现**（chat-ingestion-contract.md user_recollection）
+- [x] 完整对话导出 → **v2 已实现**（memory-protocol.md 选项 D）
+- [x] 发展关系前置条件检查（第零步）→ **v2 已实现**（pursue-or-not.md）
 
 ---
 
@@ -183,8 +188,10 @@ v0 版本在关系分析、追求决策、消息代拟等核心能力上已经�
 
 - [x] `validate_contract.ps1` — All checks passed
 - [x] SKILL.md frontmatter 完整
-- [x] 21个 references/ 全部存在
-- [x] 7个 scripts/ 全部存在
+- [x] `validate_contract.ps1` — All checks passed
+- [x] SKILL.md frontmatter 完整
+- [x] 21个 references/ 全部存在（v2 更新：古典层扩展后为 24 个）
+- [x] 7个 scripts/ 全部存在（v2 更新：search_classics.ps1 新增后为 8 个）
 - [x] 20个交叉引用路径有效
 - [x] 无孤儿 reference 文件
 - [x] data-root.txt 指向相对路径
@@ -192,8 +199,8 @@ v0 版本在关系分析、追求决策、消息代拟等核心能力上已经�
 - [x] 隐私承诺在 skill 可控范围内
 - [x] 人格洞察层全文使用"该体系内部认为"风格
 - [x] 来源注册表四个条目有可核验 URL
-- [x] 固定阈值全部替换为情境判断
+- [x] 固定阈值全部替换为情境判断（v2 修复：lifecycle-routing.md:61 残留一处 `≥ 2-3 次`，已于 v2 修正）
 - [x] 脚本"失败即非零退出"
-- [x] description ≤ 400 字符
-- [x] 研发资料已移出
+- [x] description ≤ 400 字符（v2 修复：实际 v1 为 453 字符，v2 压缩至 ~360 字符）
+- [x] 研发资料已移出（v2 修正：资料位于 `love-me-research/` 子目录，通过 .gitignore 排除）
 - [x] LICENSE / README.md / .gitignore 已创建

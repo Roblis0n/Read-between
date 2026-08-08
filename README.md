@@ -58,7 +58,7 @@ read-between/
 ├── .gitignore
 ├── agents/
 │   └── openai.yaml             # 界面元数据
-├── references/                 # 21 个按需加载的深度指令
+├── references/                 # 24 个按需加载的深度指令（含古典层）
 │   ├── intent-insight.md           # 意图识别与真实意图洞察
 │   ├── pursue-or-not.md            # 追/不追五步决策框架
 │   ├── pursuit-strategy.md         # 追求四阶段全链路
@@ -94,7 +94,7 @@ read-between/
 │   ├── lifecycle-routing.md        # 全生命周期状态机
 │   ├── output-contracts.md         # 输出契约
 │   └── data-root.txt               # 数据目录路径
-└── scripts/                    # 7 个 PowerShell 验证工具
+└── scripts/                    # 8 个 PowerShell 验证工具
     ├── validate_contract.ps1        # 静态契约验证（文件存在性 + 交叉引用完整性）
     ├── validate_chat_import.ps1     # 聊天导入格式验证
     ├── normalize_timestamps.ps1     # 时间戳标准化
@@ -106,7 +106,7 @@ read-between/
 
 ## 验证工具
 
-7 个 PowerShell 脚本覆盖从格式检查到隐私保护的完整链路：
+8 个 PowerShell 脚本覆盖从格式检查到隐私保护的完整链路：
 
 | 脚本 | 用途 | 何时运行 |
 |------|------|---------|

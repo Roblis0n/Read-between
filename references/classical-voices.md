@@ -24,7 +24,7 @@
 | 情绪温度 | intent-insight 已有的判断 | 高温先短后长、先接情绪；低温可铺陈 |
 | 对方画像 | 用户描述的 ta 的个性 | 选材考虑接收方的感受 |
 
-完整画像 → 声音映射见 `classical-interpretation.md` 第九章。
+完整画像 → 声音映射见 `classical-interpretation.md` 第七章（风格路由）。
 
 ### 1.3 默认策略
 

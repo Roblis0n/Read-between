@@ -1,4 +1,4 @@
 interface:
   display_name: "Read Between 恋爱全流程参谋"
-  short_description: "追不追→怎么追→追到之后怎么办。聊天证据分析、消息代拟、约会策略与情绪支持。可应要求提供星座/八字/MBTI参照视角。"
-  default_prompt: "Use $read-between to help with relationship decisions, dating strategy, chat analysis, message drafting, emotional support, or zodiac/BaZi/MBTI perspectives (as reference frameworks, not decision tools)."
+  short_description: "追不追→怎么追→追到之后怎么办。聊天证据分析、消息代拟、约会策略、多对象比较与情绪支持。可应要求提供星座/八字/MBTI参照视角或古典诗词哲学参照。"
+  default_prompt: "Use $read-between to help with relationship decisions, dating strategy, multi-prospect comparison, chat analysis, message drafting, emotional support, zodiac/BaZi/MBTI perspectives (as reference frameworks, not decision tools), or classical Chinese poetry and philosophy for emotional resonance."

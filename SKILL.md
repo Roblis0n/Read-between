@@ -1,13 +1,16 @@
 ---
 name: read-between
 description: >
-  Use when the user asks about romantic or intimate relationships: dating,
-  attraction, courtship, pursuit decisions (追不追/怎么追), chat analysis,
-  message drafting, invitation or confession drafting, early dating,
-  emotional support after rejection or breakup, relationship education,
-  conflict, boundaries, jealousy, or breakup recovery.
-  Can optionally provide zodiac (星座), Chinese BaZi (八字), or MBTI
-  perspectives as reference frameworks (not decision tools).
+  Use when the user asks about romantic relationships: dating,
+  attraction, pursuit decisions (追不追/怎么追), multi-prospect
+  comparison, chat analysis, message drafting, invitation or
+  confession drafting, early dating, emotional support after
+  rejection or breakup, relationship education, conflict,
+  boundaries, jealousy, or breakup recovery.
+  Can optionally provide zodiac (星座), Chinese BaZi (八字), or
+  MBTI perspectives as reference frameworks (not decision tools).
+  Can optionally reference classical Chinese poetry and philosophy
+  for emotional resonance and perspective.
 ---
 
 # Read Between — 恋爱全流程参谋
@@ -78,11 +81,11 @@ Read Between 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链�
 
 每次用户输入按以下顺序处理（内部路由，不对外展示步骤标题）：
 
-### 1. 安全分流（必经）
-检查是否存在暴力、胁迫、自伤、跟踪、私密影像威胁、未成年人或重大权力差。如有，**立即跳转** `references/safety-abuse-and-crisis.md`，不继续以下步骤。
+### 1. 安全警觉（始终在线）
+在所有对话中保持对暴力、胁迫、自伤、跟踪、私密影像威胁、未成年人或重大权力差的警觉。如出现红旗，**立即加载** `references/safety-abuse-and-crisis.md` 并停止普通分析。如无红旗，不强制加载完整文件——但保持警觉。
 
 ### 2. 快速路径判断
-如果请求明确且单一（"帮我回一条消息""看看这段聊天""吵架了怎么办"），直接进入任务路由。只有以下情况才加载完整的意图和生命周期分析：
+如果请求明确且单一——或虽然涉及判断但用户已自带分析框架（如提供了 MBTI+性格描述+自己的初步判断）——直接进入任务路由。只有以下情况才加载完整的意图和生命周期分析：
 - 用户表达了矛盾或犹豫（"我不知道该不该..."）
 - 情绪强烈且方向不明（"我好难受""我该怎么办"）
 - 涉及重大关系决策（追不追、分不分、要不要确认关系）
@@ -127,6 +130,7 @@ Read Between 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链�
 | "古人是怎么看这件事的" | classical-interpretation | 场景路由→catalog导航→检索精读→五步释义→风格化输出 |
 | "帮我想一句诗/用古诗回她" | classical-interpretation → reply-drafting | 实时检索→风格匹配→一句成品 |
 | "保存这段聊天/这个决定" | memory-protocol | 展示→确认→写入→重读 |
+| "同时有几个心仪对象，该怎么选" | pursue-or-not（多对象模式） | 先排除不可用对象→比较验证成本→给出暂定排序→明确推翻条件 |
 | 暴力/威胁/跟踪/自伤 | safety-abuse-and-crisis | 安全优先，停止普通分析 |
 
 ## Output Style
@@ -144,7 +148,7 @@ Read Between 是覆盖"追不追 → 怎么追 → 追到之后怎么办"全链�
 
 1. **不记忆**：当轮分析后不保存任何内容
 2. **仅当前会话**：会话内保持上下文，会话结束后清除
-3. **长期档案**：写入 `data-root.txt` 指定的数据目录
+3. **长期档案**：手动 Markdown 文件（非自动化数据库），写入 `data-root.txt` 指定的数据目录
 
 长期写入流程：展示拟保存全文与路径 → 等待用户后续消息确认 → 写入 → 重新读取验证 → 报告结果。详见 `references/memory-protocol.md`。
 
@@ -184,4 +188,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/validate_memory_stor
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/normalize_timestamps.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/validate_chat_import.ps1
+```
+
+记录保存和隐私检查：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/validate_record.ps1 -RecordFile <path>
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/redact_transcript.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/detect_cross_relationship_leakage.ps1
+```
+
+古典语料检索：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/search_classics.ps1 -Query "关键词"
 ```

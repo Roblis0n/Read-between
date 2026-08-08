@@ -47,7 +47,7 @@
   │     ├─ 冲突处理 → conflict-and-repair.md
   │     ├─ 关系教学 → relationship-education.md
   │     ├─ 星座/MBTI/八字 → personality-insight-layer.md
-  │     ├─ 古籍视角 → past-wis-bridge.md
+  │     ├─ 古典视角 → classical-interpretation.md → classical-catalog.md → classical-voices.md → classical-corpus/
   │     └─ 婚后问题 → partnership-marriage-overview.md（精简版）
   │     ↓
   │
@@ -146,7 +146,7 @@ read-between 采用了与 journal-auditor、master-writing 等现有 skill 一�
 - **scripts/ 是确定性验证工具**：PowerShell 脚本负责格式检查、时间标准化、去标识化等不需要模型推理的机械任务。
 
 这样设计的好处：
-1. **上下文效率**：不需要每次都把21个参考文件全部载入模型上下文
+1. **上下文效率**：不需要每次都把24个参考文件全部载入模型上下文
 2. **可维护性**：修改某个领域（如星座模块）不影响其他部分
 3. **可测试性**：每个参考文件和脚本可以独立验证
 4. **一致性**：与项目中其他 Tier 2 skill 的组织方式一致
@@ -204,20 +204,19 @@ personality-insight-layer.md 是 read-between 最大的单文件（~400行）。
 
 每次分析强制附带不确定性声明，且禁止用法列表中包含用户最常见但最危险的用法（如"八字不合建议分手"）。
 
-### 3.4 古籍桥接的轻量化设计
+### 3.4 古典自服务层的设计
 
-past-wis-bridge.md 与 past-wis 的完整流程形成了鲜明的对比：
+read-between 内置了完整的古典智慧层，不依赖外部 skill。包含 10 部中国古典文本（《诗经》《世说新语》《菜根谭》等，共 ~26,000 行），通过以下组件自服务：
 
-| | past-wis | read-between bridge |
-|---|---------|---------------|
-| 候选池 | 80-150条 | 从30条预筛选清单中选 |
-| 精读数量 | 12-24个片段 | 1-3个相关段落 |
-| 检索轮次 | 2轮（4路召回+反证搜索） | 直接路径读取 |
-| 引用格式 | 引文凭条制度 | 书名+作者+朝代+语境+迁移限度 |
-| 风格 | 古雅白话 | 现代汉语（原文+解释都如此） |
-| 证据地位 | 决策证据 | 参考视角 |
+- `classical-interpretation.md`（588 行）：古典释义宪法——触发条件、场景路由、五步释义纪律、联网现代参照规则、冲突裁决
+- `classical-catalog.md`（182 行）：10 部典籍的导航目录——朝代、体裁、情感场景标签、核心章节、使用说明
+- `classical-voices.md`（388 行）：五个古典声音（共情者/直言者/追问者/说书人/烟火人）——语气、节奏、文本偏好、禁忌
+- `classical-corpus/`（11 文件，~25,800 行）：10 部古典原文 + 使用说明
+- `scripts/search_classics.ps1`：关键词检索脚本——用于在 25,800 行语料中快速定位相关段落
 
-这样设计是因为：read-between 场景中的古籍需求通常是"有没有一首诗能表达我现在的感受"或"古人有没有类似的故事"，而非"我需要用古籍来证明或推翻一个决定"。后者的严谨性需要 past-wis 的完整流程；前者只需要快速、准确、负责任地引用。
+五步释义纪律：原文摘录 → 白话转译 → 情感连接（古人这样感受过 → 你现在的感受）→ 联网现代参照（可选）→ 限度的完整表达（"这不证明什么"）。
+
+证据地位：古典引用始终为第 4 级证据——只作理解或叙事材料，不单独作为决策证据。现代平等、同意、安全原则 > 古籍。
 
 ### 3.5 记忆系统的字段级治理
 
@@ -262,12 +261,13 @@ research-report.md 审计了42个 GitHub 仓库。read-between 的差异化不�
 |------|--------|--------|
 | SKILL.md（核心路由） | 1 | 181 |
 | agents（界面定义） | 1 | 5 |
-| references（参考文件） | 21 | 2,285 |
-| scripts（验证脚本） | 7 | ~550 |
+| references（参考文件） | 24 | ~3,800 |
+| scripts（验证脚本） | 8 | ~1,080 |
 | config（配置） | 1 | 1 |
-| **总计** | **31** | **~3,022** |
+| **总计（不含古典语料）** | **36** | **~5,250** |
 
 注：3个原始文件（plan.md, research-report.md, research-packet.json）保留在原目录中，不计入新建文件。
+古典语料（classical-corpus/） | 11 | ~25,800 | 10部经典原文，按需检索
 
 ### 参考文件按层分布
 
@@ -276,5 +276,6 @@ research-report.md 审计了42个 GitHub 仓库。read-between 的差异化不�
 - 聊天功能层（5）：emotional-containment, chat-ingestion-contract, chat-evidence-and-uncertainty, reply-drafting, dialogue-practice
 - 关系深度层（3）：relationship-education, conflict-and-repair, partnership-marriage-overview
 - 守护层（3）：safety-abuse-and-crisis, privacy-threat-model, memory-protocol
-- 桥接层（2）：past-wis-bridge, personality-insight-layer
+- 桥接层（2）：classical-interpretation + classical-corpus（自服务古典层）, personality-insight-layer
+- 古典层（5）：classical-interpretation, classical-catalog, classical-voices, classical-corpus（11文件）, search_classics.ps1
 - 配置（1）：data-root.txt

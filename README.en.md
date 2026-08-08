@@ -59,7 +59,7 @@ read-between/
 ├── .gitignore
 ├── agents/
 │   └── openai.yaml             # Interface metadata
-├── references/                 # 21 on-demand deep-instruction modules
+├── references/                 # 24 on-demand reference files (incl. classical layer)
 │   ├── intent-insight.md           # Intent recognition & genuine need insight
 │   ├── pursue-or-not.md            # 5-step pursue-or-not decision framework
 │   ├── pursuit-strategy.md         # 4-phase pursuit roadmap
@@ -95,7 +95,7 @@ read-between/
 │   ├── lifecycle-routing.md        # Full-lifecycle state machine
 │   ├── output-contracts.md         # Output format contracts
 │   └── data-root.txt               # Data directory path
-└── scripts/                    # 7 PowerShell validation tools
+└── scripts/                    # 8 PowerShell validation tools
     ├── validate_contract.ps1        # Static contract validation (file existence + cross-reference integrity)
     ├── validate_chat_import.ps1     # Chat import format validation
     ├── normalize_timestamps.ps1     # Timestamp normalization
@@ -107,7 +107,7 @@ read-between/
 
 ## Validation Tools
 
-Seven PowerShell scripts covering the full pipeline from format checking to privacy protection:
+Eight PowerShell scripts covering the full pipeline from format checking to privacy protection:
 
 | Script | Purpose | When to Run |
 |--------|---------|-------------|
